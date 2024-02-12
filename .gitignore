@@ -4,3 +4,4 @@ DS_Store
 instance/
 .env
 __pycache__/
+.flaskenv
