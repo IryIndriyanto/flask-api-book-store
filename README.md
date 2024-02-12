@@ -47,3 +47,4 @@
     - Documentation
     - Error handling
 - python-dotenv: Load environment variables from .env file
+- psycopg2: PostgreSQL adapter
