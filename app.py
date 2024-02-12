@@ -8,7 +8,7 @@ from db import db
 from resources.book import blp as book_blueprint
 
 
-def create_app(db_url=None):
+def create_app():
     app = Flask(__name__)
     load_dotenv()
 
@@ -21,8 +21,7 @@ def create_app(db_url=None):
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 
     # Database Config
-    app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL", "sqlite:///data.db")
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///data.db")
 
     db.init_app(app)
     with app.app_context():
