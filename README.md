@@ -18,7 +18,7 @@
     - Database configuration
 - app.py
     - Application configuration
-- models.py
+- models
     - Database models
     - database-level validation
 - schemas.py
