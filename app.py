@@ -4,7 +4,6 @@ from flask_smorest import Api
 from dotenv import load_dotenv
 
 from db import db
-
 from resources.book import blp as book_blueprint
 
 
@@ -22,7 +21,6 @@ def create_app():
 
     # Database Config
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///data.db")
-
     db.init_app(app)
     with app.app_context():
         db.create_all()

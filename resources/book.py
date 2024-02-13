@@ -35,8 +35,8 @@ class Book(MethodView):
 class Book(MethodView):
     @blp.response(200, BookSchema)
     def get(self, book_id):
-        store = BookModel.query.get_or_404(book_id)
-        return store
+        book = BookModel.query.get_or_404(book_id)
+        return book
 
     @blp.arguments(BookSchema)
     @blp.response(200, BookSchema)
