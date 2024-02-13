@@ -28,6 +28,12 @@ def create_app():
         db.create_all()
 
     api = Api(app)
+
     api.register_blueprint(book_blueprint)
+
+    # blueprints = [book_blueprint]
+    # for bp in blueprints:
+    #     bp.url_prefix = f"/v1{bp.url_prefix}"
+    #     api.register_blueprint(bp)
 
     return app
