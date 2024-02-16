@@ -7,10 +7,11 @@ class BookModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False, unique=True)
     author = db.Column(db.String(80), nullable=False)
-    price = db.Column(db.Float(precision=2), nullable=False)
+    price = db.Column(db.Numeric(precision=10, scale=3), nullable=False)
 
     @classmethod
     def get_books(cls):
+        # return sql.execute("SELECT * FROM books")
         return cls.query.all()
 
     @classmethod
