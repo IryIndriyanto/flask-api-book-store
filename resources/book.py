@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from models import BookModel
 from schemas import BookSchema
 
-blp = Blueprint("books", "books", description="Operations on books", url_prefix="/books")
+blp = Blueprint("books", "books", description="Operations on books", url_prefix="books")
 
 
 @blp.route('/')

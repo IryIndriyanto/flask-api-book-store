@@ -27,11 +27,14 @@ def create_app():
 
     api = Api(app)
 
-    api.register_blueprint(book_blueprint)
+    v1_blueprints = [book_blueprint]
+    for bp in v1_blueprints:
+        bp.url_prefix = f"/v1/{bp.url_prefix}"
+        api.register_blueprint(bp)
 
-    # blueprints = [book_blueprint]
-    # for bp in blueprints:
-    #     bp.url_prefix = f"/v1{bp.url_prefix}"
-    #     api.register_blueprint(bp)
+    v2_blueprints = []
+    for bp in v2_blueprints:
+        bp.url_prefix = f"/v2/{bp.url_prefix}"
+        api.register_blueprint(bp)
 
     return app
