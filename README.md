@@ -73,3 +73,9 @@
 
 - docker build -t pojan-flask-api-book-store .
 - docker run -p 5000:5000 -w /app -v "$(pwd):/app" pojan-flask-api-book-store sh -c "flask run --host 0.0.0.0"
+
+### Unit test
+
+- poetry add pytest pytest-cov
+- pytest
+- pytest --cov
