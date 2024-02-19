@@ -96,6 +96,25 @@ def test_get_book_not_found(test_app):
             }
 
 
+# DELETE /v1/books/{book_id}
+
+def test_delete_book(test_app, data):
+    with test_app.test_request_context(json=data):
+        book = Books.post(data)
+        response = Book.delete(book, 1)
+        assert response == {"message": "Book deleted"}
+
+
+def test_delete_book_not_found(test_app):
+    with test_app.test_request_context():
+        with pytest.raises(NotFound):
+            response = Book.delete(None, 1)
+            assert response.status_code == 404
+            assert response.get_json() == {
+                "message": "Book not found"
+            }
+
+
 # PUT /v1/books/{book_id}
 
 def test_put_book(test_app, data):
@@ -123,20 +142,32 @@ def test_put_book_not_found(test_app, data):
             }
 
 
-# DELETE /v1/books/{book_id}
-
-def test_delete_book(test_app, data):
+def test_put_books_integrity_error(test_app, data):
+    book_2 = {
+        "title": "Harry Potter 2",
+        "author": "Rowling",
+        "price": 150
+    }
     with test_app.test_request_context(json=data):
-        book = Books.post(data)
-        response = Book.delete(book, 1)
-        assert response == {"message": "Book deleted"}
-
-
-def test_delete_book_not_found(test_app):
-    with test_app.test_request_context():
-        with pytest.raises(NotFound):
-            response = Book.delete(None, 1)
-            assert response.status_code == 404
+        Books.post(data)
+    with test_app.test_request_context(json=book_2):
+        Books.post(book_2)
+        with pytest.raises(BadRequest):
+            response = Book.put(book_2, book_id=1)
+            assert response.status_code == 400
             assert response.get_json() == {
-                "message": "Book not found"
+                "message": "A book with that title already exist."
+            }
+
+
+@patch('resources.book.BookModel.update_book')
+def test_put_books_sql_error(mock_update_book, test_app, data):
+    with test_app.test_request_context(json=data):
+        mock_update_book.side_effect = SQLAlchemyError
+        with pytest.raises(InternalServerError):
+            Books.post(data)
+            response = Book.put(data, book_id=1)
+            assert response.status_code == 500
+            assert response.get_json() == {
+                "message": "An error occurred while inserting the book."
             }

@@ -41,8 +41,13 @@ class Book(MethodView):
     def put(self, book_data, book_id):
         print('here')
         book = BookModel.get_book(book_id)
-        book.update_book(book_data)
-        return book
+        try:
+            book.update_book(book_data)
+            return book
+        except IntegrityError:
+            abort(400, message="A book with that title already exist.")
+        except SQLAlchemyError:
+            abort(500, message="An error occurred while updating the book.")
 
     def delete(self, book_id):
         book = BookModel.get_book(book_id)
