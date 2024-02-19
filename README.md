@@ -79,3 +79,5 @@
 - poetry add pytest pytest-cov
 - pytest
 - pytest --cov
+- pytest --cov-report term-missing --cov=resources tests/
+- pytest --cov-report term-missing --cov=models tests/

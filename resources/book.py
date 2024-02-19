@@ -9,7 +9,7 @@ blp = Blueprint("books", "books", description="Operations on books", url_prefix=
 
 
 @blp.route('/')
-class Book(MethodView):
+class Books(MethodView):
     @blp.response(200, BookSchema(many=True))
     def get(self):
         return BookModel.get_books()
@@ -39,6 +39,7 @@ class Book(MethodView):
     @blp.arguments(BookSchema)
     @blp.response(200, BookSchema)
     def put(self, book_data, book_id):
+        print('here')
         book = BookModel.get_book(book_id)
         book.update_book(book_data)
         return book

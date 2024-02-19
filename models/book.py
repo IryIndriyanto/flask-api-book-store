@@ -1,4 +1,5 @@
 from db import db
+from flask_smorest import abort
 
 
 class BookModel(db.Model):
@@ -16,7 +17,10 @@ class BookModel(db.Model):
 
     @classmethod
     def get_book(cls, book_id):
-        return cls.query.get_or_404(book_id)
+        book = db.session.get(cls, book_id)
+        if book is None:
+            abort(404, message="Book not found")
+        return book
 
     def add_book(self):
         db.session.add(self)

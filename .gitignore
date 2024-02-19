@@ -5,3 +5,4 @@ instance/
 .env
 .flaskenv
 **/__pycache__/
+.coverage
