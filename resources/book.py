@@ -39,7 +39,6 @@ class Book(MethodView):
     @blp.arguments(BookSchema)
     @blp.response(200, BookSchema)
     def put(self, book_data, book_id):
-        print('here')
         book = BookModel.get_book(book_id)
         try:
             book.update_book(book_data)

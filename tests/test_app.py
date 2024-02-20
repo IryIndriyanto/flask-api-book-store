@@ -9,18 +9,19 @@ from werkzeug.exceptions import BadRequest, NotFound, InternalServerError
 
 @pytest.fixture
 def data():
-    return {
-        "title": "Harry Potter",
+    book = {
+        "title": "Harry Potter 1",
         "author": "Rowling",
         "price": 150
     }
+    yield book
 
 
 # POST /v1/books/
 
 def test_post_books(test_app, data):
     with test_app.test_request_context(json=data):
-        response = Books.post(data)
+        response = Books.post(None)
         assert response.status_code == 200
         assert response.get_json() == {
             'id': 1,
@@ -30,25 +31,17 @@ def test_post_books(test_app, data):
 
 def test_post_books_integrity_error(test_app, data):
     with test_app.test_request_context(json=data):
-        Books.post(data)
         with pytest.raises(BadRequest):
-            response = Books.post(data)
-            assert response.status_code == 400
-            assert response.get_json() == {
-                "message": "A book with that title already exist."
-            }
+            Books.post(None)
+            Books.post(None)
 
 
-@patch('resources.book.BookModel.add_book')
+@patch('models.book.BookModel.add_book')
 def test_post_books_sql_error(mock_add_book, test_app, data):
     with test_app.test_request_context(json=data):
-        mock_add_book.side_effect = SQLAlchemyError
         with pytest.raises(InternalServerError):
-            response = Books.post(data)
-            assert response.status_code == 500
-            assert response.get_json() == {
-                "message": "An error occurred while inserting the book."
-            }
+            mock_add_book.side_effect = SQLAlchemyError
+            Books.post(None)
 
 
 # GET /v1/books/
