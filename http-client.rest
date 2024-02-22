@@ -1,0 +1,28 @@
+### GET ALL ANIMALS
+GET {{BASE_URL}}/books
+
+### GET ANIMAL BY ID
+GET {{BASE_URL}}/books/1
+
+### POST ANIMAL
+POST {{BASE_URL}}/books
+Content-Type: application/json
+
+{
+  "age": 12,
+  "gender": "male",
+  "species": "herbivore"
+}
+
+### UPDATE ANIMAL
+PUT {{BASE_URL}}/books/1
+Content-Type: application/json
+
+{
+  "age": 122,
+  "gender": "male",
+  "species": "herbivore"
+}
+
+### DELETE ANIMAL
+DELETE {{BASE_URL}}/books/1
