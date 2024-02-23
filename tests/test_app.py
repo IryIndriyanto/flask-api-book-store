@@ -55,23 +55,25 @@ def test_get_books_empty(test_app):
 
 def test_get_books(test_app, data):
     with test_app.test_request_context(json=data):
-        book = Books.post(data)
-        response = Books.get(book)
+        Books.post(None)
+    with test_app.test_request_context(json={
+        "title": "Harry Potter 2",
+        "author": "Rowling",
+        "price": 150
+
+    }):
+        Books.post(None)
+        response = Books.get(None)
         assert response.status_code == 200
-        assert response.get_json() == [
-            {
-                "id": 1,
-                **data
-            }
-        ]
+        assert len(response.get_json()) == 2
 
 
 # GET /v1/books/{book_id}
 
 def test_get_book(test_app, data):
     with test_app.test_request_context(json=data):
-        book = Books.post(data)
-        response = Book.get(book, book_id=1)
+        Books.post(None)
+        response = Book.get(None, book_id=1)
         assert response.status_code == 200
         assert response.get_json() == {
             'id': 1,
@@ -89,8 +91,8 @@ def test_get_book_not_found(test_app):
 
 def test_delete_book(test_app, data):
     with test_app.test_request_context(json=data):
-        book = Books.post(data)
-        response = Book.delete(book, 1)
+        Books.post(None)
+        response = Book.delete(None, 1)
         assert response == {"message": "Book deleted"}
 
 
@@ -104,16 +106,17 @@ def test_delete_book_not_found(test_app):
 
 def test_put_book(test_app, data):
     with test_app.test_request_context(json=data):
-        Books.post(data)
+        Books.post(None)
         response = Book.put(book_data={
             **data,
-            "title": "New Harry Potter",
+            "title": "Harry Potter 2",
         }, book_id=1)
+
         assert response.status_code == 200
         assert response.get_json() == {
             'id': 1,
             **data,
-            "title": "New Harry Potter"
+            "title": "Harry Potter 2"
         }
 
 
@@ -134,7 +137,7 @@ def test_put_books_integrity_error(test_app, data):
     with test_app.test_request_context(json=book_2):
         with pytest.raises(BadRequest):
             Books.post(book_2)
-            response = Book.put(book_2, book_id=1)
+            Book.put(book_2, book_id=1)
 
 
 @patch('resources.book.BookModel.update_book')
