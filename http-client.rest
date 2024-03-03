@@ -9,10 +9,10 @@ POST {{BASE_URL}}/books
 Content-Type: application/json
 
 {
-  "title": "Harry Potter 1",
+  "title": "Harry Potter 2",
   "author": "J.K. Rowling",
-  "price": 20,
-  "year": 1997
+  "price": 30,
+  "year": 1998
 }
 
 ### UPDATE BOOK
@@ -55,3 +55,36 @@ Content-Type: application/json
 
 ### DELETE USER
 DELETE {{BASE_URL}}/users/16
+
+# ----------------- REVIEW -----------------
+
+### GET ALL REVIEWS
+GET {{BASE_URL}}/reviews
+
+### GET REVIEW BY ID
+GET {{BASE_URL}}/reviews/2
+
+### POST REVIEW
+POST {{BASE_URL}}/reviews
+Content-Type: application/json
+
+{
+  "book_id": 1,
+  "user_id": 1,
+  "rating": 5,
+  "comment": "Great book!"
+}
+
+### UPDATE REVIEW
+PUT {{BASE_URL}}/reviews/1
+Content-Type: application/json
+
+{
+  "bookId": 1,
+  "userId": 1,
+  "rating": 4,
+  "comment": "Great book!"
+}
+
+### DELETE REVIEW
+DELETE {{BASE_URL}}/reviews/16

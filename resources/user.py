@@ -28,11 +28,11 @@ class Users(MethodView):
         return user
 
 
-@blp.route('/<int:book_id>')
+@blp.route('/<int:user_id>')
 class Book(MethodView):
     @blp.response(200, UserSchema)
-    def get(self, book_id):
-        user = UserModel.get_user(book_id)
+    def get(self, user_id):
+        user = UserModel.get_user(user_id)
         return user
 
     @blp.arguments(UserSchema)
@@ -47,7 +47,7 @@ class Book(MethodView):
         except SQLAlchemyError:
             abort(500, message="An error occurred while add the user.")
 
-    def delete(self, book_id):
-        user = UserModel.get_user(book_id)
+    def delete(self, user_id):
+        user = UserModel.get_user(user_id)
         user.delete_user()
         return {"message": "User deleted"}

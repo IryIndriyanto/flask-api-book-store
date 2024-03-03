@@ -11,7 +11,7 @@ class BookModel(db.Model):
     price = db.Column(db.Numeric(precision=10, scale=3), nullable=False)
     year = db.Column(db.Integer, nullable=False)
 
-    users_review = db.relationship("UserModel", back_populates="books_review", secondary="review")
+    books_review = db.relationship("ReviewModel", back_populates="book")
 
     @classmethod
     def get_books(cls):

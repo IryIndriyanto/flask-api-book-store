@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from db import db
 from resources.book import blp as book_blueprint
 from resources.user import blp as user_blueprint
+from resources.review import blp as review_blueprint
 
 
 def create_app(is_test_env=False):
@@ -32,7 +33,7 @@ def create_app(is_test_env=False):
 
     api = Api(app)
 
-    v1_blueprints = [book_blueprint, user_blueprint]
+    v1_blueprints = [book_blueprint, user_blueprint, review_blueprint]
     for bp in v1_blueprints:
         bp.url_prefix = f"/v1/{bp.url_prefix}"
         api.register_blueprint(bp)
