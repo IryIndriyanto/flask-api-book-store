@@ -45,7 +45,6 @@ class BookModel(db.Model):
     def update_book(self, book_data):
         try:
             for key, value in book_data.items():
-                print('key:', key, 'value:', value)
                 setattr(self, key, value)
             db.session.commit()
         except Exception as e:

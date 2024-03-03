@@ -28,3 +28,30 @@ Content-Type: application/json
 
 ### DELETE BOOK
 DELETE {{BASE_URL}}/books/16
+
+# ----------------- USERS -----------------
+
+### GET ALL USERS
+GET {{BASE_URL}}/users
+
+### GET USER BY ID
+GET {{BASE_URL}}/users/1
+
+### POST USER
+POST {{BASE_URL}}/users
+Content-Type: application/json
+
+{
+  "username": "user1"
+}
+
+### UPDATE USER
+PUT {{BASE_URL}}/users/1
+Content-Type: application/json
+
+{
+  "username": "userA"
+}
+
+### DELETE USER
+DELETE {{BASE_URL}}/users/16
