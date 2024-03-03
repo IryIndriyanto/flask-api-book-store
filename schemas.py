@@ -1,15 +1,22 @@
 from marshmallow import Schema, fields
 
 
-class UserSchema(Schema):
+class PlainUserSchema(Schema):
     id = fields.Int(dump_only=True)
     username = fields.Str(required=True)
 
 
-class BookSchema(Schema):
+class PlainBookSchema(Schema):
     id = fields.Int(dump_only=True)
     title = fields.Str(required=True)
     author = fields.Str(required=True)
     price = fields.Float(required=True)
     year = fields.Int(required=True)
-    user_review = fields.List(fields.Nested(UserSchema()), dump_only=True)
+
+
+class BookSchema(PlainBookSchema):
+    users_review = fields.List(fields.Nested(PlainUserSchema()), dump_only=True)
+
+
+class UserSchema(PlainUserSchema):
+    books_review = fields.List(fields.Nested(PlainBookSchema()), dump_only=True)
