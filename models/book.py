@@ -1,8 +1,8 @@
 from db import db
-from flask_smorest import abort
+from models.common import CommonModel
 
 
-class BookModel(db.Model):
+class BookModel(CommonModel):
     __tablename__ = "book"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -12,41 +12,3 @@ class BookModel(db.Model):
     year = db.Column(db.Integer, nullable=False)
 
     books_review = db.relationship("ReviewModel", back_populates="book")
-
-    @classmethod
-    def get_books(cls):
-        # return sql.execute("SELECT * FROM books")
-        return cls.query.all()
-
-    @classmethod
-    def get_book(cls, book_id):
-        book = db.session.get(cls, book_id)
-        if book is None:
-            abort(404, message="Book not found")
-        return book
-
-    def add_book(self):
-        try:
-            with db.session.begin():
-                db.session.add(self)
-                db.session.commit()
-        except Exception as e:
-            db.session.rollback()
-            raise e
-
-    def delete_book(self):
-        try:
-            db.session.delete(self)
-            db.session.commit()
-        except Exception as e:
-            db.session.rollback()
-            raise e
-
-    def update_book(self, book_data):
-        try:
-            for key, value in book_data.items():
-                setattr(self, key, value)
-            db.session.commit()
-        except Exception as e:
-            db.session.rollback()
-            raise e

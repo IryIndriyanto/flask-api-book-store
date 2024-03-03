@@ -12,14 +12,14 @@ blp = Blueprint("users", "users", description="Operations on users", url_prefix=
 class Users(MethodView):
     @blp.response(200, UserSchema(many=True))
     def get(self):
-        return UserModel.get_users()
+        return UserModel.get_items()
 
     @blp.arguments(UserSchema)
     @blp.response(200, UserSchema)
     def post(self, user_data):
         user = UserModel(**user_data)
         try:
-            user.add_user()
+            user.add_item()
         except IntegrityError:
             abort(400, message="A user with that username already exist.")
         except SQLAlchemyError:
@@ -32,13 +32,13 @@ class Users(MethodView):
 class Book(MethodView):
     @blp.response(200, UserSchema)
     def get(self, user_id):
-        user = UserModel.get_user(user_id)
+        user = UserModel.get_item(user_id)
         return user
 
     @blp.arguments(UserSchema)
     @blp.response(200, UserSchema)
     def put(self, user_data, user_id):
-        user = UserModel.get_user(user_id)
+        user = UserModel.get_item(user_id)
         try:
             user.update_user(user_data)
             return user
@@ -48,6 +48,6 @@ class Book(MethodView):
             abort(500, message="An error occurred while add the user.")
 
     def delete(self, user_id):
-        user = UserModel.get_user(user_id)
-        user.delete_user()
+        user = UserModel.get_item(user_id)
+        user.delete_item()
         return {"message": "User deleted"}

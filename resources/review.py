@@ -12,14 +12,14 @@ blp = Blueprint("reviews", "reviews", description="Operations on reviews", url_p
 class Books(MethodView):
     @blp.response(200, ReviewSchema(many=True))
     def get(self):
-        return ReviewModel.get_reviews()
+        return ReviewModel.get_items()
 
     @blp.arguments(ReviewSchema)
     @blp.response(200, ReviewSchema)
     def post(self, review_data):
         review = ReviewModel(**review_data)
         try:
-            review.add_review()
+            review.add_item()
         except SQLAlchemyError:
             abort(500, message="An error occurred while inserting the review.")
 
@@ -30,20 +30,20 @@ class Books(MethodView):
 class Book(MethodView):
     @blp.response(200, ReviewSchema)
     def get(self, review_id):
-        review = ReviewModel.get_review(review_id)
+        review = ReviewModel.get_item(review_id)
         return review
 
     @blp.arguments(ReviewSchema)
     @blp.response(200, ReviewSchema)
     def put(self, review_data, review_id):
-        review = ReviewModel.get_review(review_id)
+        review = ReviewModel.get_item(review_id)
         try:
-            review.update_review(review_data)
+            review.update_item(review_data)
             return review
         except SQLAlchemyError:
             abort(500, message="An error occurred while updating the review.")
 
     def delete(self, review_id):
-        review = ReviewModel.get_review(review_id)
-        review.delete_review()
+        review = ReviewModel.get_item(review_id)
+        review.delete_item()
         return {"message": "Review deleted"}

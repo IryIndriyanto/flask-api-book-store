@@ -12,7 +12,7 @@ blp = Blueprint("books", "books", description="Operations on books", url_prefix=
 class Books(MethodView):
     @blp.response(200, BookSchema(many=True))
     def get(self):
-        return BookModel.get_books()
+        return BookModel.get_items()
 
     @blp.arguments(BookSchema)
     @blp.response(200, BookSchema)
@@ -20,7 +20,7 @@ class Books(MethodView):
         # book = BookModel(title=book_data["title"], author=book_data["author"], price=book_data["price"])
         book = BookModel(**book_data)
         try:
-            book.add_book()
+            book.add_item()
         except IntegrityError:
             abort(400, message="A book with that title already exist.")
         except SQLAlchemyError:
@@ -33,15 +33,15 @@ class Books(MethodView):
 class Book(MethodView):
     @blp.response(200, BookSchema)
     def get(self, book_id):
-        book = BookModel.get_book(book_id)
+        book = BookModel.get_item(book_id)
         return book
 
     @blp.arguments(BookSchema)
     @blp.response(200, BookSchema)
     def put(self, book_data, book_id):
-        book = BookModel.get_book(book_id)
+        book = BookModel.get_item(book_id)
         try:
-            book.update_book(book_data)
+            book.update_item(book_data)
             return book
         except IntegrityError:
             abort(400, message="A book with that title already exist.")
@@ -49,6 +49,6 @@ class Book(MethodView):
             abort(500, message="An error occurred while updating the book.")
 
     def delete(self, book_id):
-        book = BookModel.get_book(book_id)
-        book.delete_book()
+        book = BookModel.get_item(book_id)
+        book.delete_item()
         return {"message": "Book deleted"}
