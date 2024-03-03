@@ -81,3 +81,11 @@
 - pytest --cov
 - pytest --cov-report term-missing --cov=resources tests/
 - pytest --cov-report term-missing --cov=models tests/
+
+### Migration
+
+- poetry add flask-migrate
+- modify app.py
+- flask db init
+- flask db migrate
+- flask db upgradee
