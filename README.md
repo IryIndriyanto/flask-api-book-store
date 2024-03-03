@@ -88,4 +88,4 @@
 - modify app.py
 - flask db init
 - flask db migrate
-- flask db upgradee
+- flask db upgrade
