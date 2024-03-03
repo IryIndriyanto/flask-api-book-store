@@ -16,6 +16,8 @@ gunicorn = "^21.2.0"
 pytest = "^8.0.1"
 pytest-cov = "^4.1.0"
 flask-migrate = "^4.0.5"
+flask-login = "^0.6.3"
+flask-jwt-extended = "^4.6.0"
 
 
 [build-system]

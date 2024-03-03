@@ -102,3 +102,20 @@
 
 - https://sqlmodel.tiangolo.com/tutorial/relationship-attributes/back-populates/
 - https://medium.com/@ns2586/sqlalchemys-relationship-and-lazy-parameter-4a553257d9ef
+
+## Authentication
+
+- Basic Authentication
+- Token Authentication (Stateful)
+    - `Session` based
+    - Flask-Login
+- Token Authentication (Stateless)
+    - JWT (JSON Web Token)
+    - Flask-JWT-Extended
+- API Key Authentication
+- OAuth2 Authentication
+
+- lets-go-further/html/15.01-authentication-options.html
+- https://blog.bytebytego.com/p/password-session-cookie-token-jwt
+- https://blog.bytebytego.com/p/password-session-cookie-token-jwt-ec1
+- http://cryto.net/%7Ejoepie91/blog/2016/06/13/stop-using-jwt-for-sessions/
