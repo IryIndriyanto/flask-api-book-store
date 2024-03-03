@@ -6,3 +6,4 @@ class BookSchema(Schema):
     title = fields.Str(required=True)
     author = fields.Str(required=True)
     price = fields.Float(required=True)
+    year = fields.Int(required=True)

@@ -9,6 +9,7 @@ class BookModel(db.Model):
     title = db.Column(db.String(80), nullable=False, unique=True)
     author = db.Column(db.String(80), nullable=False)
     price = db.Column(db.Numeric(precision=10, scale=3), nullable=False)
+    year = db.Column(db.Integer, nullable=False)
 
     @classmethod
     def get_books(cls):

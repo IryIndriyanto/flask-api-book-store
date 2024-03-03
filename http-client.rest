@@ -11,7 +11,8 @@ Content-Type: application/json
 {
   "title": "Harry Potter 1",
   "author": "J.K. Rowling",
-  "price": 20
+  "price": 20,
+  "year": 1997
 }
 
 ### UPDATE BOOK
@@ -21,7 +22,8 @@ Content-Type: application/json
 {
   "title": "Harry Potter 2",
   "author": "J.K. Rowling",
-  "price": 20
+  "price": 20,
+  "year": 1998
 }
 
 ### DELETE BOOK
