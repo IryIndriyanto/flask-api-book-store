@@ -19,10 +19,10 @@ PUT {{BASE_URL}}/books/1
 Content-Type: application/json
 
 {
-  "title": "Harry Potter 1",
+  "title": "Harry Potter 2",
   "author": "J.K. Rowling",
   "price": 20
 }
 
 ### DELETE BOOK
-DELETE {{BASE_URL}}/books/1
+DELETE {{BASE_URL}}/books/16
