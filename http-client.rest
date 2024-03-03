@@ -1,28 +1,28 @@
-### GET ALL ANIMALS
+### GET ALL BOOKS
 GET {{BASE_URL}}/books
 
-### GET ANIMAL BY ID
+### GET BOOK BY ID
 GET {{BASE_URL}}/books/1
 
-### POST ANIMAL
+### POST BOOK
 POST {{BASE_URL}}/books
 Content-Type: application/json
 
 {
-  "age": 12,
-  "gender": "male",
-  "species": "herbivore"
+  "title": "Harry Potter 1",
+  "author": "J.K. Rowling",
+  "price": 20
 }
 
-### UPDATE ANIMAL
+### UPDATE BOOK
 PUT {{BASE_URL}}/books/1
 Content-Type: application/json
 
 {
-  "age": 122,
-  "gender": "male",
-  "species": "herbivore"
+  "title": "Harry Potter 1",
+  "author": "J.K. Rowling",
+  "price": 20
 }
 
-### DELETE ANIMAL
+### DELETE BOOK
 DELETE {{BASE_URL}}/books/1
