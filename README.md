@@ -89,3 +89,16 @@
 - flask db init
 - flask db migrate
 - flask db upgrade
+
+### Table Relationship
+
+- User
+- Book
+- Review
+
+- User-Book (Many-to-Many)
+    - User-Review (One-to-Many)
+    - Book-Review (One-to-Many)
+
+- https://sqlmodel.tiangolo.com/tutorial/relationship-attributes/back-populates/
+- https://medium.com/@ns2586/sqlalchemys-relationship-and-lazy-parameter-4a553257d9ef
