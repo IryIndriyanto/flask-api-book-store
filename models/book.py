@@ -23,14 +23,28 @@ class BookModel(db.Model):
         return book
 
     def add_book(self):
-        db.session.add(self)
-        db.session.commit()
+        try:
+            with db.session.begin():
+                db.session.add(self)
+                db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            raise e
 
     def delete_book(self):
-        db.session.delete(self)
-        db.session.commit()
+        try:
+            db.session.delete(self)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            raise e
 
     def update_book(self, book_data):
-        for key, value in book_data.items():
-            setattr(self, key, value)
-        db.session.commit()
+        try:
+            for key, value in book_data.items():
+                print('key:', key, 'value:', value)
+                setattr(self, key, value)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            raise e
