@@ -1,15 +1,17 @@
+# ----------------- BOOKS -----------------------------------------------------------------------
+
 ### GET ALL BOOKS
 GET {{BASE_URL}}/books
 
 ### GET BOOK BY ID
-GET {{BASE_URL}}/books/1
+GET {{BASE_URL}}/books/3
 
 ### POST BOOK
 POST {{BASE_URL}}/books
 Content-Type: application/json
 
 {
-  "title": "Harry Potter 2",
+  "title": "Harry Potter 1",
   "author": "J.K. Rowling",
   "price": 30,
   "year": 1998
@@ -29,34 +31,40 @@ Content-Type: application/json
 ### DELETE BOOK
 DELETE {{BASE_URL}}/books/16
 
-# ----------------- USERS -----------------
+# ----------------- USERS -----------------------------------------------------------------------
 
-### GET ALL USERS
+### GET ALL USERS (LOGIN REQUIRED)
 GET {{BASE_URL}}/users
+Authorization: Bearer {{JWT_TOKEN}}
 
-### GET USER BY ID
-GET {{BASE_URL}}/users/1
+### GET USER BY ID (ADMIN REQUIRED)
+GET {{BASE_URL}}/users/11
+Authorization: Bearer {{JWT_TOKEN}}
 
-### POST USER
+### POST USER (ADMIN REQUIRED)
 POST {{BASE_URL}}/users
+Authorization: Bearer {{JWT_TOKEN}}
 Content-Type: application/json
 
 {
-  "username": "user1"
+  "username": "user3",
+  "password": "password"
 }
 
-### UPDATE USER
+### UPDATE USER (ADMIN REQUIRED)
 PUT {{BASE_URL}}/users/1
+Authorization: Bearer {{JWT_TOKEN}}
 Content-Type: application/json
 
 {
   "username": "userA"
 }
 
-### DELETE USER
+### DELETE USER (ADMIN REQUIRED)
 DELETE {{BASE_URL}}/users/16
+Authorization: Bearer {{JWT_TOKEN}}
 
-# ----------------- REVIEW -----------------
+# ----------------- REVIEWS -----------------------------------------------------------------------
 
 ### GET ALL REVIEWS
 GET {{BASE_URL}}/reviews
@@ -64,13 +72,13 @@ GET {{BASE_URL}}/reviews
 ### GET REVIEW BY ID
 GET {{BASE_URL}}/reviews/2
 
-### POST REVIEW
+### POST REVIEW (JWT-LOGIN REQUIRED)
 POST {{BASE_URL}}/reviews
+Authorization: Bearer {{JWT_TOKEN}}
 Content-Type: application/json
 
 {
   "book_id": 1,
-  "user_id": 1,
   "rating": 5,
   "comment": "Great book!"
 }
@@ -80,11 +88,35 @@ PUT {{BASE_URL}}/reviews/1
 Content-Type: application/json
 
 {
-  "bookId": 1,
-  "userId": 1,
+  "bookId": 3,
   "rating": 4,
   "comment": "Great book!"
 }
 
 ### DELETE REVIEW
 DELETE {{BASE_URL}}/reviews/16
+
+
+# ----------------- AUTH -----------------------------------------------------------------------
+
+### JWT REGISTER
+POST {{BASE_URL}}/auth/register-jwt
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "password"
+}
+
+### JWT LOGIN
+POST {{BASE_URL}}/auth/login-jwt
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "password"
+}
+
+### JWT REFRESH TOKEN
+POST {{BASE_URL}}/auth/refresh-jwt
+Authorization: Bearer {{JWT_REFRESH_TOKEN}}

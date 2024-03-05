@@ -502,6 +502,23 @@ files = [
 ]
 
 [[package]]
+name = "passlib"
+version = "1.7.4"
+description = "comprehensive password hashing framework supporting over 30 schemes"
+optional = false
+python-versions = "*"
+files = [
+    {file = "passlib-1.7.4-py2.py3-none-any.whl", hash = "sha256:aa6bca462b8d8bda89c70b382f0c298a20b5560af6cbfa2dce410c0a2fb669f1"},
+    {file = "passlib-1.7.4.tar.gz", hash = "sha256:defd50f72b65c5402ab2c573830a6978e5f202ad0d984793c8dde2c4152ebe04"},
+]
+
+[package.extras]
+argon2 = ["argon2-cffi (>=18.2.0)"]
+bcrypt = ["bcrypt (>=3.1.0)"]
+build-docs = ["cloud-sptheme (>=1.10.1)", "sphinx (>=1.6)", "sphinxcontrib-fulltoc (>=1.2.0)"]
+totp = ["cryptography"]
+
+[[package]]
 name = "pluggy"
 version = "1.4.0"
 description = "plugin and hook calling mechanisms for python"
@@ -747,4 +764,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "499046485ec1eb010c1b7a96a744e98f492bd21c27d90cc2bdf018def44c62cb"
+content-hash = "1acafc9deea93f8a4930ded7f4e0cb1c3b9e6d0b56fac8e3768c0f55eec3238e"

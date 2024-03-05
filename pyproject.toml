@@ -18,6 +18,7 @@ pytest-cov = "^4.1.0"
 flask-migrate = "^4.0.5"
 flask-login = "^0.6.3"
 flask-jwt-extended = "^4.6.0"
+passlib = "^1.7.4"
 
 
 [build-system]

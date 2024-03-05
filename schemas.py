@@ -4,6 +4,7 @@ from marshmallow import Schema, fields
 class PlainUserSchema(Schema):
     id = fields.Int(dump_only=True)
     username = fields.Str(required=True)
+    password = fields.Str(required=True, load_only=True)
 
 
 class PlainBookSchema(Schema):
@@ -24,6 +25,7 @@ class UserSchema(PlainUserSchema):
 
 class PlainReviewSchema(Schema):
     id = fields.Int(dump_only=True)
+    book_id = fields.Int(required=True)
     comment = fields.Str(required=True)
     rating = fields.Int(required=True)
 

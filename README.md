@@ -119,3 +119,5 @@
 - https://blog.bytebytego.com/p/password-session-cookie-token-jwt
 - https://blog.bytebytego.com/p/password-session-cookie-token-jwt-ec1
 - http://cryto.net/%7Ejoepie91/blog/2016/06/13/stop-using-jwt-for-sessions/
+
+- poetry add flask-login flask-jwt-extended passlib

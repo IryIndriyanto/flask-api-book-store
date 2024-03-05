@@ -18,9 +18,8 @@ class CommonModel(db.Model):
 
     def add_item(self):
         try:
-            with db.session.begin():
-                db.session.add(self)
-                db.session.commit()
+            db.session.add(self)
+            db.session.commit()
         except Exception as e:
             db.session.rollback()
             raise e

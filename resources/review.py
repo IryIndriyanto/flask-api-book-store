@@ -1,9 +1,11 @@
 from flask_smorest import abort, Blueprint
 from flask.views import MethodView
-from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from sqlalchemy.exc import SQLAlchemyError
+from flask_jwt_extended import jwt_required
 
 from models import ReviewModel
 from schemas import ReviewSchema
+from resources.auth import get_user_id
 
 blp = Blueprint("reviews", "reviews", description="Operations on reviews", url_prefix="reviews")
 
@@ -16,11 +18,22 @@ class Books(MethodView):
 
     @blp.arguments(ReviewSchema)
     @blp.response(200, ReviewSchema)
+    @jwt_required()
     def post(self, review_data):
-        review = ReviewModel(**review_data)
+        user_id = get_user_id()
+        review = ReviewModel(**review_data, user_id=user_id)
         try:
+            existing_review = ReviewModel.query.filter(
+                ReviewModel.book_id == review.book_id,
+                ReviewModel.user_id == user_id
+            ).first()
+
+            if existing_review:
+                abort(400, message="You have already reviewed this book.")
+
             review.add_item()
-        except SQLAlchemyError:
+        except SQLAlchemyError as e:
+            print(e)
             abort(500, message="An error occurred while inserting the review.")
 
         return review
