@@ -120,4 +120,12 @@
 - https://blog.bytebytego.com/p/password-session-cookie-token-jwt-ec1
 - http://cryto.net/%7Ejoepie91/blog/2016/06/13/stop-using-jwt-for-sessions/
 
-- poetry add flask-login flask-jwt-extended passlib
+### FLASK-JWT-EXTENDED
+
+- poetry add flask-jwt-extended passlib
+- create userModel, run migration
+- register jwt in app.py
+- create auth resource
+- register auth resource in app.py
+- apply jwt_required decorator to the protected resource
+- apply admin_required decorator to the admin resource
