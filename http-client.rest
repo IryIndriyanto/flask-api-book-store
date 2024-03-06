@@ -38,7 +38,7 @@ GET {{BASE_URL}}/users
 Authorization: Bearer {{JWT_TOKEN}}
 
 ### GET USER BY ID (ADMIN REQUIRED)
-GET {{BASE_URL}}/users/11
+GET {{BASE_URL}}/users/1
 Authorization: Bearer {{JWT_TOKEN}}
 
 ### POST USER (ADMIN REQUIRED)
@@ -104,7 +104,7 @@ POST {{BASE_URL}}/auth/register-jwt
 Content-Type: application/json
 
 {
-  "username": "user1",
+  "username": "user2",
   "password": "password"
 }
 
@@ -113,7 +113,7 @@ POST {{BASE_URL}}/auth/login-jwt
 Content-Type: application/json
 
 {
-  "username": "user1",
+  "username": "user2",
   "password": "password"
 }
 
