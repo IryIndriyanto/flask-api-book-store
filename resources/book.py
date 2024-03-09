@@ -1,6 +1,7 @@
 from flask_smorest import abort, Blueprint
 from flask.views import MethodView
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from flask_jwt_extended import jwt_required
 
 from models import BookModel
 from schemas import BookSchema

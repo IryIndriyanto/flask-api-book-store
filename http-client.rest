@@ -1,7 +1,8 @@
 # ----------------- BOOKS -----------------------------------------------------------------------
 
-### GET ALL BOOKS
+### GET ALL BOOKS (LOGIN REQUIRED)
 GET {{BASE_URL}}/books
+Authorization: Bearer {{JWT_TOKEN}}
 
 ### GET BOOK BY ID
 GET {{BASE_URL}}/books/3
@@ -33,7 +34,7 @@ DELETE {{BASE_URL}}/books/16
 
 # ----------------- USERS -----------------------------------------------------------------------
 
-### GET ALL USERS (LOGIN REQUIRED)
+### GET ALL USERS (ADMIN REQUIRED)
 GET {{BASE_URL}}/users
 Authorization: Bearer {{JWT_TOKEN}}
 
@@ -104,8 +105,9 @@ POST {{BASE_URL}}/auth/register-jwt
 Content-Type: application/json
 
 {
-  "username": "user2",
-  "password": "password"
+  "username": "user3",
+  "password": "password",
+  "email": "em@gmail.com"
 }
 
 ### JWT LOGIN
@@ -113,7 +115,7 @@ POST {{BASE_URL}}/auth/login-jwt
 Content-Type: application/json
 
 {
-  "username": "user2",
+  "username": "user1",
   "password": "password"
 }
 

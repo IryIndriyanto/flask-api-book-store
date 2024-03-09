@@ -57,17 +57,31 @@ class TokenRefresh(MethodView):
         return {"access_token": new_token}, 200
 
 
-def admin_required(func):
-    @wraps(func)
-    @jwt_required()
-    def wrapper(*args, **kwargs):
-        jwt = get_jwt()
-        if not jwt.get("sub").get("role") == "admin":
-            abort(401, message="Admin privilege required.")
-        return func(*args, **kwargs)
+def admin_required(role_required="admin"):
+    def decorator(func):
+        @wraps(func)
+        @jwt_required()
+        def wrapper(*args, **kwargs):
+            jwt = get_jwt()
+            if jwt.get("sub").get("role") != role_required:
+                abort(401, message=f"{role_required.capitalize()} privilege required.")
+            return func(*args, **kwargs)
 
-    return wrapper
+        return wrapper
 
+    return decorator
+
+
+# def admin_required(func):
+#     @wraps(func)
+#     @jwt_required()
+#     def wrapper(*args, **kwargs):
+#         jwt = get_jwt()
+#         if not jwt.get("sub").get("role") == "admin":
+#             abort(401, message="Admin privilege required.")
+#         return func(*args, **kwargs)
+#
+#     return wrapper
 
 def get_user_id():
     jwt = get_jwt()

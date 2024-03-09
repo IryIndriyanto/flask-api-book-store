@@ -19,7 +19,7 @@ class Users(MethodView):
 
     @blp.arguments(UserSchema)
     @blp.response(200, UserSchema)
-    @admin_required
+    @admin_required(role_required="admin")
     def post(self, user_data):
         user = UserModel(**user_data, role="admin")
         try:
@@ -33,14 +33,14 @@ class Users(MethodView):
 @blp.route('/<int:user_id>')
 class Book(MethodView):
     @blp.response(200, UserSchema)
-    @admin_required
+    @admin_required()
     def get(self, user_id):
         user = UserModel.get_item(user_id)
         return user
 
     @blp.arguments(UserSchema)
     @blp.response(200, UserSchema)
-    @admin_required
+    @admin_required()
     def put(self, user_data, user_id):
         user = UserModel.get_item(user_id)
         try:
@@ -51,7 +51,7 @@ class Book(MethodView):
         except SQLAlchemyError:
             abort(500, message="An error occurred while add the user.")
 
-    @admin_required
+    @admin_required()
     def delete(self, user_id):
         user = UserModel.get_item(user_id)
         user.delete_item()

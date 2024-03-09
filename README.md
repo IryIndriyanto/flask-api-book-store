@@ -129,3 +129,7 @@
 - register auth resource in app.py
 - apply jwt_required decorator to the protected resource
 - apply admin_required decorator to the admin resource
+
+- CAESAR CIPHER
+
+- ATTACK THE ENEMY AT DAWN => BUUBL UIF FOENZ BU EBXO (secret key: 1)
