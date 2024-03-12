@@ -105,9 +105,8 @@ POST {{BASE_URL}}/auth/register-jwt
 Content-Type: application/json
 
 {
-  "username": "user3",
-  "password": "password",
-  "email": "em@gmail.com"
+  "username": "user1",
+  "password": "password"
 }
 
 ### JWT LOGIN

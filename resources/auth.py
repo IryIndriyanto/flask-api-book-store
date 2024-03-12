@@ -4,6 +4,8 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt, get_jwt_identity, jwt_required
 from passlib.hash import pbkdf2_sha256
 from functools import wraps
+from sqlalchemy import select
+from db import db
 
 from models import UserModel
 from schemas import UserSchema, PlainUserSchema
@@ -36,10 +38,7 @@ class UserRegister(MethodView):
 class UserLogin(MethodView):
     @blp.arguments(UserSchema)
     def post(self, user_data):
-        user = UserModel.query.filter(
-            UserModel.username == user_data["username"]
-        ).first()
-
+        user = db.session.execute(select(UserModel).where(UserModel.username == user_data["username"])).first()[0]
         if user and pbkdf2_sha256.verify(user_data["password"], user.password):
             access_token = create_access_token(identity={"id": user.id, "role": user.role}, fresh=True)
             refresh_token = create_refresh_token(identity={"id": user.id, "role": user.role})
