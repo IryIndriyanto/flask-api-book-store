@@ -34,7 +34,7 @@ DELETE {{BASE_URL}}/books/16
 
 # ----------------- USERS -----------------------------------------------------------------------
 
-### GET ALL USERS (ADMIN REQUIRED)
+### GET ALL USERS (LOGIN REQUIRED)
 GET {{BASE_URL}}/users
 Authorization: Bearer {{JWT_TOKEN}}
 
